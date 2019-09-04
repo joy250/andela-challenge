@@ -1,0 +1,23 @@
+{
+  "name": "andela-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joy250/andela-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joy250/andela-challenge/issues"
+  },
+  "homepage": "https://github.com/joy250/andela-challenge#readme",
+  "dependencies": {
+    "should": "^13.2.3"
+  }
+}
