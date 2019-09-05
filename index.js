@@ -2,31 +2,31 @@
 
 class User {
     constructor(name) {
-      this.name = name
-      this.logedIn = false
-      this.lastLoggedInAt = null
+      this._name = name
+      this._logedIn = false
+      this._lastLoggedInAt = null
     }
     isLoggedIn() {
-      return this.loggedIn
+      return this._loggedIn
     }
     getLastLoggedInAt() {
-      return this.lastLoggedInAt
+      return this._lastLoggedInAt
     }
     logIn() {
-      this.lastLoggedInAt = new Date()
-      this.loggedIn = true
+      this._lastLoggedInAt = new Date()
+      this._loggedIn = true
     }
     logOut() {
-      this.loggedIn=false
+      this._loggedIn=false
     }
     getName() {
-      return this.name
+      return this._name
     }
     setName(name) {
-      return this.name = name
+      return this._name = name
     }
     canEdit(comment) {
-      if(comment.author.name === this.name){
+      if(comment.author._name === this._name){
         return true
       }else{
         return false
@@ -57,32 +57,32 @@ class User {
   
   class Comment {
       constructor(author = null, message, repliedTo = null) {
-        this.createdAt = new Date();
-        this.message = message;
-        this.repliedTo = repliedTo;
-        this.author = author;
+        this._createdAt = new Date();
+        this._message = message;
+        this._repliedTo = repliedTo;
+        this._author = author;
       }
       getMessage() {
-        return this.message;
+        return this._message;
       }
       setMessage(message) {
-        this.message = message;
+        this._message = message;
       }
       getCreatedAt() {
-        return this.createdAt;
+        return this._createdAt;
       }
       getAuthor() {
-        return this.author;
+        return this._author;
       }
       getRepliedTo() {
-        return this.repliedTo;
+        return this._repliedTo;
       }
       toString() {
-        if(this.repliedTo == null) {
-           return this.message + " by " + this.author.name
+        if(this._repliedTo === null) {
+           return this._message + " by " + this.author._name
         }
-        return this.message + " by " + this.author.name + " (replied to " + 
-             this.repliedTo.author.name + ")"
+        return this._message + " by " + this.author._name + " (replied to " + 
+             this._repliedTo.author._name + ")"
       }
     }
   
@@ -91,8 +91,8 @@ class User {
  var should = require('should');
  describe('OOP Tests', function() {
    it('example tests', function() {
-     var user = new User("User 1");
-     user.getName().should.eql('User 1', 'User name is set correctly');
+     var user = new User("Joy");
+     user.getName().should.eql('Joy', 'User name is set correctly');
      var mod = new Moderator("Moderator");
      mod.should.be.an.instanceof(User, 'Moderator is a User');
    });
