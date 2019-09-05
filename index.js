@@ -1,65 +1,92 @@
-/**
- * Using ES6-style classes
- * See below for an alternative ES5-prototype solution setup
- */
+
 
 class User {
-    constructor(name) {}
-    isLoggedIn() {}
-    getLastLoggedInAt() {}
-    logIn() {}
-    logOut() {}
-    getName() {}
-    setName(name) {}
-    canEdit(comment) {}
-    canDelete(comment) {}
+    constructor(name) {
+      this.name = name
+      this.logedIn = false
+      this.lastLoggedInAt = null
+    }
+    isLoggedIn() {
+      return this.loggedIn
+    }
+    getLastLoggedInAt() {
+      return this.lastLoggedInAt
+    }
+    logIn() {
+      this.lastLoggedInAt = new Date()
+      this.loggedIn = true
+    }
+    logOut() {
+      this.loggedIn=false
+    }
+    getName() {
+      return this.name
+    }
+    setName(name) {
+      return this.name = name
+    }
+    canEdit(comment) {
+      if(comment.author.name === this.name){
+        return true
+      }else{
+        return false
+      }
+    }
+    canDelete(comment) {
+      return false
+    }
   }
   
-  class Moderator {}
+  class Moderator extends User {
+    constructor(name){
+      super(name)
+    }
+    canDelete(comment){
+      return true
+    }
+  }
   
-  class Admin {}
+  class Admin extends Moderator{
+    constructor(name){
+      super(name)
+    }
+    canEdit(comment){
+      return true
+    }
+  }
   
   class Comment {
-    constructor(author, message, repliedTo) {}
-    getMessage() {}
-    setMessage(message) {}
-    getCreatedAt() {}
-    getAuthor() {}
-    getRepliedTo() {}
-    toString() {}
-  }
+      constructor(author = null, message, repliedTo = null) {
+        this.createdAt = new Date();
+        this.message = message;
+        this.repliedTo = repliedTo;
+        this.author = author;
+      }
+      getMessage() {
+        return this.message;
+      }
+      setMessage(message) {
+        this.message = message;
+      }
+      getCreatedAt() {
+        return this.createdAt;
+      }
+      getAuthor() {
+        return this.author;
+      }
+      getRepliedTo() {
+        return this.repliedTo;
+      }
+      toString() {
+        if(this.repliedTo == null) {
+           return this.message + " by " + this.author.name
+        }
+        return this.message + " by " + this.author.name + " (replied to " + 
+             this.repliedTo.author.name + ")"
+      }
+    }
   
-  /**************************
-   * Alternative using ES5 prototypes
-   * Or feel free to choose your own solution format
-   **************************
-   
-  function User(name) {}
-  User.prototype = {
-    isLoggedIn: function() {}
-    getLastLoggedInAt: function() {}
-    logIn: function() {}
-    logOut: function() {}
-    getName: function() {}
-    setName: function(name) {}
-    canEdit: function(comment) {}
-    canDelete: function(comment) {}
-  }
-  
-  var Admin = ???
-  
-  var Moderator = ???
-  
-  function Comment(author, message, repliedTo) {}
-  Comment.prototype = {
-    getMessage: function() {}
-    setMessage: function(message) {}
-    getCreatedAt: function() {}
-    getAuthor: function() {}
-    getRepliedTo: function() {}
-    toString: function() {}
-  }
-  ***************************/
+ 
  
  var should = require('should');
  describe('OOP Tests', function() {
